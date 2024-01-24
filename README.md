@@ -3,6 +3,9 @@
     * php 8.1 (i recomend to use laragon if you use windows, easy to setup)
     * nodejs
     * mysql 5 or 8 (i use 8) 
+- ### clone the repository
+    > git clone git@github.com:andikaryanto/hometest.git
+    git checkout home-test
 - ### Host your application
     - if you use laragon, just place the whole respository to C://laragon/www/{your app}, laragon will auto create a host for this application
     - use php server
