@@ -113,6 +113,8 @@ class TableReservationControllerTest extends UnitTest
                 $this->unitOfWork->persist($this->table)
                     ->shouldBeCalled();
 
+                $this->unitOfWork->persist($this->tableReservation)
+                    ->shouldBeCalled();
                 $result = $this->controller->patch($this->request);
                 verify($result)->instanceOf(SuccessResponse::class);
             });

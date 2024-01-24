@@ -43,24 +43,6 @@ class UserRoute extends CommonRoute
 
                         ]
                     );
-                // Route::get('/app-user/{user}', [UserController::class, 'get'])
-                //     ->middleware(
-                //         UserHydratorMiddleware::class . ':get'
-                //     );
-                // Route::patch('/app-user/{user}', [UserController::class, 'patch'])
-                //     ->middleware(
-                //         [
-                //             UserHydratorMiddleware::class . ':patch',
-                //             UnitOfWorkMiddleware::class . ':persist'
-                //         ]
-                //     );
-                // Route::delete('/app-user/{user}', [UserController::class, 'delete'])
-                //     ->middleware(
-                //         [
-                //             UserHydratorMiddleware::class . ':get',
-                //             UnitOfWorkMiddleware::class . ':remove'
-                //         ]
-                //     );
             });
     }
 }

@@ -1,66 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## HOW TO INSTALL
+- ### Requirements
+    * php 8.1 (i recomend to use laragon if you use windows, easy to setup)
+    * nodejs
+    * mysql 5 or 8 (i use 8) 
+- ### Host your application
+    - if you use laragon, just place the whole respository to C://laragon/www/{your app}, laragon will auto create a host for this application
+    - use php server
+        > *$ php -S localhost:9090* // what ever you want
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- ### Change the .env
+    i included the .env file so you need to chage database connection
+    >   DB_CONNECTION=mysql
+        DB_HOST=*{YOUR DATABASE HOST}*
+        DB_PORT=*{DATABASE PORT}*
+        DB_DATABASE={DATABASE NAME}
+        DB_USERNAME={DATABASE USER}
+        DB_PASSWORD={DATABASE PASSWORD}
+- ### Install yarn / npm
+    You need to install nodejs, i use nodejs 16, you can try for 14 (might work). Once nodejs installed, i suggest to use yarn to "run" javascript dependency.
+    * ##### install yarn globally
+        > *$ npm install -g yarn*
+- ### install javascript dependency
+    Go to root application and install using
+    > *$ yarn install*
+- ### Install dependecy using composer
+    Go to root application and install using
+    > *$ composer install*
+- ### Run migration
+    > *$ php artisan migrate*
+- ### Run query
+    i have couple of master data, i dont use seeder, seeder is for the test purpose only.
+    open *defaultdata.sql* and run the query
+    
+- ### Change the react config file 
+    Sorry i have not found a way to make it simple.
+    Go to *resources\js\Common\Config.jsx* and it should look like:
+    > export default {
+        api_url: 'http://hometest.test/api', // change this to your application host url
+        web_url: 'http://hometest.test' // change this to your application host url
+    }
 
-## About Laravel
+    so i use client side ReactJs to build the UI, now you can change the url as your php server to run. i recommend to use laragon with php 8.1
+- ### Build the UI template
+    > *$ yarn build*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## How To Play
+- ### Application
+    Type url application:
+    * {base_url} (change with hosted url you run) -> is the root of reservation, customer or admin can login here
+    * when you are a customer you can register / login
+    * click Sign Up button to register as a customer
+    * clicj on Sign In button if you already a customer / admin
+    * we have default data for that
+        > *andik@test.com:password123* is default admin account
+        *zuran@test.com:password123* is default customer account
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    #### login to admin dashboard
+        you can open a simple dashboard and see reservations have been created there
+        > {base_url}/login
 
-## Learning Laravel
+- ### Technical
+    i designed the base core of my application with a "package". if you look into composer.json there will be dependency called *andikaryanto11/laravelcommon*
+    - #### Dependency used (php)
+        * *andikaryanto11/laravelcommon*
+        * *andikaryanto11/graphql* // not really need this right now
+        * https://github.com/phpspec/prophecy
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    - #### Unit Test
+        i use https://github.com/phpspec/prophecy to run my unit test
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+        ##### run the test
+        you will find files named {Class}Test.php, those are classes that is used to test the logic
+        > *$ vendor/bin/paratest*
+- ### How the application works
+    it's just simple app i made for the submission test (sorry i dont have much time to complete everything within 2 days)
+    
+    - #### Customer online reservation
+        - Open your {base_url} in browser
+        - Login / Register
+        - Fill the Date reservation
+        - Choose table to be reserved
+        - Type reservation for name
+        - Click submit button
+        this will create a reservation to a customer / user
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    - #### Customer Offline reservation
+        it's all the same way like online reservation (the same UX will be used)
+        - Login as admin user
+        - Fill the Date reservation
+        - Choose table to be reserved
+        - Type reservation for name
+        - Click submit button
 
-## Laravel Sponsors
+    - #### Handle race condition
+        when a user submit a reservation, it will create a reservation data to 'table_reservations' table, the process is when application processing the data, it will check the 'tables' table is being reserved or not, when it's not UnitOfWork will update the database table 'tables' with is_reserved to true. and in the next request if a user submit reservation will do the same, so when the request try to submit a reserved "tables" data, it throw an error to tell if table is being reserved
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    - #### Api Docs
+      please checkout *routes\api.php*. i know it's poor doc. but i tried to make my code clean, i separate all api endpoint to a file (DDD design).
 
-### Premium Partners
+- ### Advance clean code (tried hard) 
+    this is what i build:
+    everything in this DDD principles, i follow how i create the tables of database
+    so every file is following the name of the table
+    example:
+    - i have table name called "table_reservations" and the other tables, so i will have:
+        * TableRerservation (app\Models\TableReservation.php) model
+        * TableReservationController (app\Http\Controllers\TableController.php) this is where i handle data after it's "validated" with a
+        laravel resource pattern, i usually have get, getAll, store, patch, delete methods for a complete life cycle of a data, it will be the same if we have another tables
+        * TableReservationHyratorMiddleware (app\Http\Middleware\Hydrators\TableReservationHydratorMiddleware.php)
+         hydrator use usefull when we do http request, what is used for:
+            
+            - it will hydrate http request post body to an entity in this case is TableReservationModel and will passed it to controller
+            - it will hydrate http request get to an entity in this case is TableReservationModel like when /table-reservation/{tableReservation}, it will find the data from a table (/table-reservation/1) with ID 1
+            and will pass it to controller
+            - it will hydrate http patch request, it will find the data with the ID 1 and modify the field with in the body from request then pass it to controller
+        * TableReservationQuery (app\Queries\TableReservationQuery.php) it is a query builder with Entity / Model base, so when we join with another table, and resulted 2 but the same, it will return distincted Model data.
+        * TableReservationRepository (app\Repositories\TableReservationRepository.php)
+        * TableReservationRoute (app\Routes\TableReservationRoute.php) this where i put routing within it's Domain Driven
+        * TableReservationViewModel (app\ViewModels\TableReservationViewModel.php), this where json resource will be created and returned with its all related table data
+        * TableReservationCollection (app\ViewModels\TableReservationCollection.php) same as view model it's just collection of that viewmodel
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- ### We might need to talk a lot if we talk about clean code design.
+    lets talk :).
 
-## Contributing
+- ### The application does not work?
+    lest talk more :)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
