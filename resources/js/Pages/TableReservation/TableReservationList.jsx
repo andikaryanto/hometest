@@ -148,13 +148,16 @@ export default function TableRerservationList() {
                             </div>
                         </TableDetail>
                         <TableDetail>
-                            <div className="flex items-center">
+                            <div className="items-center">
                                 <div className="mr-2">
                                     {e.user.username}
                                 </div>
                                 <div className="flex">
                                     <Pill className="text-xs bg-green-600 text-white mr-2">{e.user.scopes.map((e, i) => e.name).join(', ')}</Pill>
                                 </div>
+                                {e.is_complete ? <div className="flex">
+                                    <Pill className="text-xs bg-green-600 text-white mr-2">complete</Pill>
+                                </div> : null}
                             </div>
                         </TableDetail>
                         <TableDetail className={'items-center'}>
