@@ -1,0 +1,1 @@
+import{a as r}from"./app-d2a3d537.js";import{u as n,a as h}from"./app-fb271a11.js";const p=({children:e,className:o,...t})=>{const{theme:s}=n(),{hoverTheme:a,bigFontColorTheme:m}=h(s);return r("button",{...t,className:`${a} ${o} ${m}`,children:e})};export{p as B};

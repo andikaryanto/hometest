@@ -1,0 +1,24 @@
+# Template PHP Build
+
+# This template allows you to validate your PHP application.
+# The workflow allows running tests and code linting on the default branch.
+
+image: lorisleiva/laravel-docker:latest
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: PHPCS
+            script:
+              - composer install
+              - ./vendor/bin/phpcbf --standard=PSR12 app/
+            caches:
+              - composer
+        - step:
+            name: PHPUnit - PHP 8.2
+            script:
+              - composer install
+              - APP_ENV=testing php -d memory_limit=1536M vendor/bin/paratest
+            caches:
+              - composer

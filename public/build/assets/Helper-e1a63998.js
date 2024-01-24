@@ -1,0 +1,1 @@
+import{c as o}from"./Request-a7bce2e9.js";function u(r,a){return new URL(o.api_url+r.url).searchParams.get(a)}function c(r,a=!0,e="id-ID",t="IDR"){let n={style:a?"currency":"decimal",currency:t};return new Intl.NumberFormat(e,{...n,minimumFractionDigits:2}).format(r)}function i(r){return parseFloat(r)>0?parseFloat(r):0}export{c as f,u as g,i as n};

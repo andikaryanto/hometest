@@ -1,0 +1,1 @@
+import{e as t,f as e}from"./app-d2a3d537.js";import{b as o}from"./Clinic-f89fd43c.js";const i={id:0,name:"",clinic:o};t({key:"doctorListState",default:{_paging:e}});t({key:"doctorState",default:i});export{i as d};

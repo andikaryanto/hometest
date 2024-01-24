@@ -1,0 +1,8 @@
+"""
+Groupuser type
+"""
+type Groupuser {
+    id: ID
+    group_name: String
+    description: String
+}

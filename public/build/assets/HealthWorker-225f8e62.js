@@ -1,0 +1,1 @@
+import{e,f as t}from"./app-d2a3d537.js";const a={id:0,name:""};e({key:"healthWorkerTypeListState",default:{_paging:t}});e({key:"healthWorkerTypeState",default:a});const r={id:0,name:"",health_worker_type:a};e({key:"healthWorkerListState",default:{_paging:t}});e({key:"healthWorkerState",default:r});export{r as h};

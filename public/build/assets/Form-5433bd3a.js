@@ -1,0 +1,1 @@
+import{a}from"./app-d2a3d537.js";import{u as m,a as t}from"./app-fb271a11.js";const i=({children:e,className:o,...n})=>{const{theme:r}=m(),{layoutTheme:s,borderTheme:p}=t(r);return a("div",{className:`${o} ${s} border-none`,children:e})};export{i as F};

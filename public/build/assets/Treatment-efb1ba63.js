@@ -1,0 +1,1 @@
+import{e as t,f as a}from"./app-d2a3d537.js";import"./Clinic-f89fd43c.js";const e={id:null,name:"",health_worker_price:0,doctor_price:0,pharmacist_price:0,clinic_price:0},n=t({key:"treatmentListState",default:{_paging:a}}),c=t({key:"treatmentState",default:e}),s=t({key:"treatmentFilterState",default:e});export{c as a,n as b,s as c,e as t};

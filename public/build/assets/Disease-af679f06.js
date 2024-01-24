@@ -1,0 +1,1 @@
+import{e,f as s}from"./app-d2a3d537.js";import{b as a}from"./Clinic-f89fd43c.js";const t={id:0,clinic:a,code:"",name:"",description:""},c=e({key:"diseaseListState",default:{_paging:s}}),o=e({key:"diseaseState",default:t}),n=e({key:"diseaseFilterState",default:t});export{c as a,n as b,t as c,o as d};
