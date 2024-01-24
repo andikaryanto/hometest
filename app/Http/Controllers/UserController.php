@@ -31,20 +31,11 @@ class UserController extends Controller
     public function __construct(
         ScopeQuery $scopeQuery,
         UserService $userService,
-        UserQuery $userQuery,
         UnitOfWork $unitOfWork
     ) {
-        $this->userQuery = $userQuery;
-        $this->userService = $userService;
         $this->scopeQuery = $scopeQuery;
+        $this->userService = $userService;
         $this->unitOfWork = $unitOfWork;
-    }
-    /**
-     * Display user list page
-     */
-    public function getAll(Request $request): PagedJsonResponse
-    {
-        return new PagedJsonResponse('OK', ResponseConst::OK, new UserCollection($this->userQuery, $request));
     }
 
     public function store(Request $request): ResourceCreatedResponse
@@ -55,15 +46,15 @@ class UserController extends Controller
         $user = $request->getResource();
 
         if (!$request->get('scopes', null)) {
-            throw new ResponsableException('Scope harus diisi', new BadRequestResponse('Scope harus diisi'));
+            throw new ResponsableException('Scope must not null', new BadRequestResponse('Scope must not null'));
         }
 
-        if (count($request->scopes) == 0) {
-            throw new ResponsableException('Scope harus diisi', new BadRequestResponse('Scope harus diisi'));
+        if (count($request->get('scopes')) == 0) {
+            throw new ResponsableException('Scope must not null', new BadRequestResponse('Scope must not null'));
         }
 
         $scopeIds = [];
-        foreach ($request->scopes as $scope) {
+        foreach ($request->get('scopes') as $scope) {
             $scopeIds[] = $scope['id'];
         }
 
@@ -72,9 +63,9 @@ class UserController extends Controller
         return new ResourceCreatedResponse('OK', ResponseConst::OK, new UserViewModel($user, $request));
     }
 
-    public function login(Request $request) 
+    public function login(Request $request)
     {
-        $token = $this->userService->generateToken($request->email, $request->password);
+        $token = $this->userService->generateToken($request->get('email'), $request->get('password'));
         $this->unitOfWork->flush();
 
         return new SuccessResponse('OK', ResponseConst::OK, new TokenViewModel($token, $request));

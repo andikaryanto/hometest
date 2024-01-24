@@ -42,7 +42,7 @@ class TableReservationController extends Controller
             return new NoContentResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
         return new PagedJsonResponse('OK', ResponseConst::OK, new TableReservationCollection($this->tableReservationQuery, $request));
-    }    
+    }
 
 
     /**
@@ -54,11 +54,11 @@ class TableReservationController extends Controller
     {
         $resource = $request->getResource();
 
-        $user = $request->getUserToken()->getUser();               
+        $user = $request->getUserToken()->getUser();
         $resource->setUser($user);
 
         $this->tableReservationService->createReservation($resource);
-        
+
         return new ResourceCreatedResponse('OK', ResponseConst::OK, new TableReservationViewModel($resource, $request));
     }
 }

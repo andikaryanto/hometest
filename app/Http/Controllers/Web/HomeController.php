@@ -8,7 +8,6 @@ use Inertia\Response;
 
 class HomeController extends Controller
 {
-   
      /**
      * Display user list page
      */

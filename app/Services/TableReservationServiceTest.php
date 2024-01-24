@@ -3,17 +3,10 @@
 namespace App\Services;
 
 use App\Models\Table;
-use App\Http\Controllers\TableController;
 use App\Models\TableReservation;
-use App\Queries\TableQuery;
 use App\Repositories\TableRepository;
 use Codeception\Specify;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use LaravelCommon\Responses\NoContentResponse;
-use LaravelCommon\Responses\PagedJsonResponse;
-use LaravelCommon\System\Http\Request;
 use Prophecy\PhpUnit\ProphecyTrait;
 use LaravelCommon\Tests\UnitTest;
 use LaravelCommon\Utilities\Database\UnitOfWork;
@@ -56,7 +49,6 @@ class TableReservationServiceTest extends UnitTest
                     ->shouldBeCalled()
                     ->willReturn($this->table);
 
-
                 try {
                     $result = $this->service->createReservation($this->tableReservation);
                 } catch (Exception $e) {
@@ -71,7 +63,7 @@ class TableReservationServiceTest extends UnitTest
 
                 $this->unitOfWork->persist($this->table)
                     ->shouldBeCalled();
-                    
+
                 $this->unitOfWork->persist($this->tableReservation)
                     ->shouldBeCalled();
 

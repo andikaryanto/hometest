@@ -35,7 +35,7 @@ class TableReservation extends Model
 
     /**
      * this is bad, getTable is reserved by laravel for database 'table'
-     * 
+     *
      * @return ?Table
      */
     public function getTablee(): ?Table
@@ -72,7 +72,7 @@ class TableReservation extends Model
     {
         $this->user->set($user);
         return $this;
-    }    
+    }
 
     /**
      *
@@ -92,7 +92,7 @@ class TableReservation extends Model
     {
         $this->reserve_at = $reserveAt;
         return $this;
-    }       
+    }
 
     /**
      *
@@ -112,7 +112,7 @@ class TableReservation extends Model
     {
         $this->is_complete = $isComplete;
         return $this;
-    }         
+    }
 
     /**
      *

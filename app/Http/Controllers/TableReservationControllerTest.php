@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\TableReservation;
@@ -33,14 +34,14 @@ class TableReservationControllerTest extends UnitTest
                 $this->prophesize(TableReservationService::class);
 
             $this->lengthAwarePaginator =
-                $this->prophesize(LengthAwarePaginator::class);                
+                $this->prophesize(LengthAwarePaginator::class);
 
             $this->tableReservation = (new TableReservation())
                 ->setId(1);
-                
+
             $this->user = (new User())
                 ->setId(1);
-                
+
             $this->userToken = (new Token())
                 ->setId(1)
                 ->setUser($this->user);
@@ -83,7 +84,7 @@ class TableReservationControllerTest extends UnitTest
 
         $this->describe('->store()', function () {
             $this->describe('when tableReservationQuery has data', function () {
-                
+
                 $this->request->setResource($this->tableReservation);
                 $this->request->setUserToken($this->userToken);
 
@@ -93,7 +94,6 @@ class TableReservationControllerTest extends UnitTest
 
                 $result = $this->controller->store($this->request);
                 verify($result)->instanceOf(ResourceCreatedResponse::class);
-
             });
         });
     }

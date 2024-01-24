@@ -40,7 +40,7 @@ class UserRoute extends CommonRoute
                 Route::post('/app-user/login', [UserController::class, 'login'])
                     ->middleware(
                         [
-                            
+
                         ]
                     );
                 // Route::get('/app-user/{user}', [UserController::class, 'get'])

@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Middleware\Hydrators;
+
 use Illuminate\Support\Facades\Hash;
 use LaravelCommon\App\Http\Middleware\HydratorMiddleware;
 use LaravelCommon\App\Repositories\UserRepository;
 
 class UserHydratorMiddleware extends HydratorMiddleware
 {
-
     public function __construct(
         UserRepository $userRepository,
     ) {

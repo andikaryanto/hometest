@@ -33,12 +33,12 @@ class TableReservationViewModel extends AbstractViewModel
     public function addResource()
     {
         $table = $this->model->getTablee();
-        if($table) {
+        if ($table) {
             $this->embedResource('table', new TableViewModel($table, $this->request));
         }
 
         $user = $this->model->getUser();
-        if($user) {
+        if ($user) {
             $this->embedResource('user', new UserViewModel($user, $this->request));
         }
 
