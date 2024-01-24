@@ -39,6 +39,15 @@ class TableReservationRoute extends CommonRoute
                 ->middleware([
                     CheckScopeMiddleware::class . ':admin'
                 ]);
+
+            Route::patch('/table-reservation/{tableReservation}', [TableReservationController::class, 'patch'])
+                ->middleware([
+                    
+                    CheckScopeMiddleware::class . ':admin',
+                    TableReservationHydratorMiddleware::class . ':patch',
+                    UnitOfWorkMiddleware::class . ':commit'
+                    
+                ]);
         });
     }
 }

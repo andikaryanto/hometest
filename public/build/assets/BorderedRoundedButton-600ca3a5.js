@@ -1,1 +1,0 @@
-import{a as s}from"./app-d2a3d537.js";import"./app-fb271a11.js";import{B as e}from"./Button-6a81ea58.js";const n=({children:o,className:r,...t})=>s(e,{...t,className:r+" rounded-full px-4 py-2 mr-2 mb-2",children:o}),d=({children:o,className:r,...t})=>s(n,{...t,className:r+"",children:o});export{d as B,n as R};

@@ -1,1 +1,0 @@
-import{a as i,d as o}from"./app-d2a3d537.js";import"./app-fb271a11.js";function d({className:t="",disabled:e,children:n,...r}){return i(o,{...r,className:`inline-flex items-center px-2 py-2 text-white border border-transparent rounded-md uppercase text-xs tracking-widest focus:outline-none transition ease-in-out duration-150 ${e&&"opacity-25"} `+t,children:n})}export{d as B};

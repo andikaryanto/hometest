@@ -1,1 +1,0 @@
-import{a as s}from"./app-d2a3d537.js";import{u as e}from"./app-fb271a11.js";import{B as m}from"./Button-6a81ea58.js";const p=({children:t,className:o,...r})=>(e(),s(m,{className:`p-2 rounded-lg text-sm ${o}`,...r,children:t}));export{p as C};

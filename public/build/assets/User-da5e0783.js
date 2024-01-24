@@ -1,0 +1,1 @@
+import{R as e,p as s}from"./app-230bb32c.js";const t={id:0,username:"",email:"",password:"",scopes:[]};e({key:"userListState",default:{_paging:s}});const r=e({key:"userState",default:t});export{r as u};

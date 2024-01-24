@@ -1,0 +1,1 @@
+import{R as e,p as a}from"./app-230bb32c.js";import"./Clinic-1b8e14ea.js";import{b as s}from"./Table-d31decab.js";const t={id:0,reserve_at:null,table:s,is_complete:!1,reserve_for:""},i={_paging:a},n=e({key:"tableReservationListState",default:i}),b=e({key:"tableReservationState",default:t});e({key:"tableReservationFilterState",default:t});export{n as a,i as b,t as c,b as t};

@@ -36,6 +36,9 @@ class TableReservationHydratorMiddleware extends HydratorMiddleware
             'reserve_for',
             [$this->model, 'setReserveFor']
         )->when(
+            'is_complete',
+            [$this->model, 'setIsComplete']
+        )->when(
             'table.id',
             [$this->model, 'setTablee'],
             [$this->tableRepository, 'find']

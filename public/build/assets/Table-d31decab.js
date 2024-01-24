@@ -1,0 +1,1 @@
+import{R as t,p as a}from"./app-230bb32c.js";import"./Clinic-1b8e14ea.js";const e={id:0,name:"",is_reserved:!1},i=t({key:"tableListState",default:{_paging:a}}),b=t({key:"tableState",default:e});t({key:"tableFilterState",default:e});export{b as a,e as b,i as t};

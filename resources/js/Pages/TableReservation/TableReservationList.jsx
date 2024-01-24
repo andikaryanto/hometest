@@ -6,7 +6,7 @@ import { Table } from "@/Components/Table/Table";
 import { TableRow } from "@/Components/Table/TableRow";
 import { TableDetail } from "@/Components/Table/TableDetail";
 import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
-import { url_table_reservations, url_patient_registration, url_patient_registrations } from "@/Common/Api";
+import { url_table_reservations, url_patient_registration, url_patient_registrations, url_table_reservation } from "@/Common/Api";
 import Pill from "@/Components/Pill/Pill";
 import { personNewObject, personState } from "@/States/Person";
 import CircleActionButton from "@/Components/Button/CircleActionButton";
@@ -24,6 +24,7 @@ export default function TableRerservationList() {
     const [notification, setNotification] = useRecoilState(toastState);
     const [isFormOpen, setFormOpen] = useState(false);
     const [isLoadingData, setIsLoadingData] = useState(false);
+    const [toast, setToast] = useRecoilState(toastState);
     const [isFiltePanelVisible, setIsFilterPanelVisible] = useState(false);
 
 
@@ -56,6 +57,29 @@ export default function TableRerservationList() {
             });
     }
 
+    const postTableReservation = () => {
+        if (tableReservation.id > 0) {
+            patch(url_table_reservation + '/' + tableReservation.id, getToken(), {
+                is_complete: true
+            })
+                .then(result => {
+                    if (result.status == 200) {
+                        setToast({
+                            color: ToastColor.success,
+                            message: 'Success to update status'
+                        });
+                        loadTableRerservations();
+                    }
+                })
+                .catch(err => {
+                    setToast({
+                        color: ToastColor.danger,
+                        message: 'Failed to update status'
+                    })
+                })
+        }
+    }
+
     const onSearch = (e) => {
         setPaging({
             ...paging,
@@ -85,8 +109,9 @@ export default function TableRerservationList() {
     }
 
     const onButtonActionClick = (actionButton, selectedItem) => {
+        setTableRerservation(selectedItem);
         if (actionButton.caption == 'Complete') {
-            window.location = actionButton.href + '?registration_id=' + selectedItem.registration.id;
+            postTableReservation();
         }
     }
 
@@ -143,6 +168,9 @@ export default function TableRerservationList() {
                                 </div>
                                 <div className="flex">
                                     <Pill className="text-xs bg-green-600 text-white mr-2">{e.reserve_at}</Pill>
+                                    {e.is_complete ?
+                                        <Pill className="text-xs bg-blue-600 text-white mr-2">complete</Pill> :
+                                        null}
                                 </div>
                             </div>
                         </TableDetail>
@@ -152,11 +180,10 @@ export default function TableRerservationList() {
                                     {e.user.username}
                                 </div>
                                 <div className="flex">
-                                    <Pill className="text-xs bg-green-600 text-white mr-2">{e.user.scopes.map((e, i) => e.name).join(', ')}</Pill>
+                                    <Pill className="text-xs bg-green-600 text-white mr-2 mb-1">{e.user.scopes.map((e, i) => e.name).join(', ')}</Pill>
+                                    
                                 </div>
-                                {e.is_complete ? <div className="flex">
-                                    <Pill className="text-xs bg-green-600 text-white mr-2">complete</Pill>
-                                </div> : null}
+
                             </div>
                         </TableDetail>
                         <TableDetail className={'items-center'}>

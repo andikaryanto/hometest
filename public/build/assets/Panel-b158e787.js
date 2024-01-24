@@ -1,1 +1,0 @@
-import{a as m}from"./app-d2a3d537.js";import{u as n,a as r}from"./app-fb271a11.js";function p({children:e,className:a,isVisible:o,...l}){const{theme:s}=n(),{layoutTheme:t,layoutLightTheme:i}=r(s);return o?m("div",{className:`flex-shrink-0 rounded-lg ${a} ${t}`,children:e}):null}export{p as P};
