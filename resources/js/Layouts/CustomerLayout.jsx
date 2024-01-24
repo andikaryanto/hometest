@@ -62,7 +62,7 @@ export default function CustomerLayout({ children }) {
             <div className='flex justify-between items-center text-white text-lg'>
                 <div className='flex w-1/2 '>
                     <div className='flex justify-between w-1/3'>
-                        <div >Home</div>
+                        <div>Home</div>
                         <div>Places</div>
                         <div>Help</div>
                     </div>
