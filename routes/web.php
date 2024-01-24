@@ -39,7 +39,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/admin', function () {
+Route::get('/dashboard', function () {
     if (Auth::check()) {
         // User is authenticated
         // Your logic here

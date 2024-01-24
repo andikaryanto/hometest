@@ -53,7 +53,7 @@ class TableReservationViewModel extends AbstractViewModel
         return [
             'id' => $this->model->getId(),
             'reserve_at' => $this->model->getReserveAt(),
-            'is_completed' => $this->model->getIsCompleted()
+            'is_complete' => $this->model->getIsComplete()
         ];
     }
 }

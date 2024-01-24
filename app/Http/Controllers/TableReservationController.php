@@ -15,6 +15,8 @@ use LaravelCommon\Responses\ResourceCreatedResponse;
 
 class TableReservationController extends Controller
 {
+    public const CUSTOMER_SCOPE_ID = 1;
+
     protected TableReservationQuery $tableReservationQuery;
     protected TableReservationService $tableReservationService;
 
@@ -52,7 +54,7 @@ class TableReservationController extends Controller
     {
         $resource = $request->getResource();
 
-        $user = $request->getUserToken()->getUser();
+        $user = $request->getUserToken()->getUser();               
         $resource->setUser($user);
 
         $this->tableReservationService->createReservation($resource);

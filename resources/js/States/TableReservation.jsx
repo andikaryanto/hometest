@@ -7,7 +7,8 @@ export const tableReservationNewObject = {
     id: 0,
     reserve_at: null,
     table: tableNewObject,
-    is_complete: false
+    is_complete: false,
+    reserve_for: ''
 }
 
 export const tableReservationListState = atom({

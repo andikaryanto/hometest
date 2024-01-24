@@ -5,9 +5,7 @@ namespace App\Http\Middleware\Hydrators;
 use App\Repositories\TableRepository;
 use App\Repositories\TableReservationRepository;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Hash;
 use LaravelCommon\App\Http\Middleware\HydratorMiddleware;
-use LaravelCommon\App\Repositories\UserRepository;
 
 class TableReservationHydratorMiddleware extends HydratorMiddleware
 {
@@ -34,6 +32,9 @@ class TableReservationHydratorMiddleware extends HydratorMiddleware
                 $reserve = Carbon::createFromFormat('Y-m-d\TH:i', $reserveAt);
                 $this->model->setReserveAt($reserve);
             }
+        )->when(
+            'reserve_for',
+            [$this->model, 'setReserveFor']
         )->when(
             'table.id',
             [$this->model, 'setTablee'],

@@ -143,6 +143,16 @@ export default function CustomerLayout({ children }) {
                         value={'TABLE ' + tableReservation.table.name}
                         onFocus={onInputTableFocus} 
                     />
+                    <TextInput
+                        type={`text`}
+                        className={'w-64 mr-4'}
+                        placeHolder={'Reserver Name'}
+                        value={tableReservation.reserve_for}
+                        onChange={e => setTableReservation({
+                            ...tableReservation,
+                            reserve_for: e.target.value
+                        })}
+                    />
                 </div>
                 
                 <Button disable={processing} onClick={onReserve} className={`text-white text-lg px-4 py-2 rounded-lg bg-green-600 hover:text-black`}>Reserve</Button>

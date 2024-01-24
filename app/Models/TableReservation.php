@@ -19,6 +19,10 @@ class TableReservation extends Model
     protected BelongsToRelation $tablee;
     protected BelongsToRelation $user;
 
+    protected $attributes = [
+        'is_complete' => false
+    ];
+
     protected $casts = [
         'reserved_at' => 'datetime'
     ];
@@ -88,17 +92,15 @@ class TableReservation extends Model
     {
         $this->reserve_at = $reserveAt;
         return $this;
-    }
-
-       
+    }       
 
     /**
      *
      * @return bool
      */
-    public function getIsCompleted(): bool
+    public function getIsComplete(): bool
     {
-        return $this->is_completed;
+        return $this->is_complete;
     }
 
     /**
@@ -106,9 +108,29 @@ class TableReservation extends Model
      * @param bool $isCompleted
      * @return TableReservation
      */
-    public function setIsCompleted(bool $isCompleted): TableReservation
+    public function setIsComplete(bool $isComplete): TableReservation
     {
-        $this->is_completed = $isCompleted;
+        $this->is_complete = $isComplete;
+        return $this;
+    }         
+
+    /**
+     *
+     * @return string
+     */
+    public function getReserveFor(): ?string
+    {
+        return $this->reserve_for;
+    }
+
+    /**
+     *
+     * @param bool $isCompleted
+     * @return TableReservation
+     */
+    public function setReserveFor(?string $reserveFor): TableReservation
+    {
+        $this->reserve_for = $reserveFor;
         return $this;
     }
 }

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('table_id')->nullable(false);
             $table->dateTime('reserve_at')->nullable(false);
-            $table->unsignedBigInteger('user_id')->nullable(false);
-            $table->boolean('is_complete')->nullable(false)->default(true);
+            $table->unsignedBigInteger('user_id')->nullable(true);
+            $table->boolean('is_complete')->nullable(false)->default(false);
+            $table->string('reserve_for')->nullable(true);
             $table->timestamps();            
 
             $table->foreign('table_id')
