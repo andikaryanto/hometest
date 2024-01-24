@@ -10,26 +10,62 @@ import TextInput from '@/Components/Input/TextInput';
 import TableChooser from '@/Pages/Table/TableChooser';
 import SlideSideBar from './SlideSideBar';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { tableState } from '@/States/Table';
 import CustomerRegister from '@/Pages/Auth/CustomerRegister';
 import Toast from '@/Components/Toast';
 import CustomerLogin from '@/Pages/Auth/CustomerLogin';
 import { getToken } from '@/Common/GetCookie';
+import { tableReservationState } from '@/States/TableReservation';
+import { post } from '@/Common/Request/Request';
+import { url_table_reservation } from '@/Common/Api';
+import { toastState } from '@/States/Common';
+import { ToastColor } from '@/Common/Toast';
 
 export default function CustomerLayout({ children }) {
-    let title = ''
+    let title = '';
     const { theme } = useTheme();
     const { layoutTheme, layoutLightTheme, bigFontColorTheme } = applicationTheme(theme);
     const [isFormOpen, setFormOpen] = useState(false);    
-    const [slideContent, setSlideContent] = useState(1);    
-    const table = useRecoilValue(tableState);
+    const [processing, setProcessing] = useState(false);    
+    const [slideContent, setSlideContent] = useState(1);  
+    const [tableReservation, setTableReservation] = useRecoilState(tableReservationState);  
+    const [toast, setToast] = useRecoilState(toastState);  
+
+    const onTableChoosen = (table) => {
+        setTableReservation({
+            ...tableReservation,
+            table
+        })
+    }
+
+    const onReserve = () => {
+        setProcessing(true);
+        post(url_table_reservation, getToken(), tableReservation)
+        .then(result => {
+            if(result.status == 201) {
+                setTableReservation(result.data.data._resources);
+                setToast({
+                    color: ToastColor.success,
+                    message: 'Reservation saved'
+                })
+            }
+            setProcessing(false);
+        })
+        .catch(err => {
+            setToast({
+                color: ToastColor.danger,
+                message: 'Reservation failed to Save'
+            });
+            setProcessing(false);
+        });
+    }
 
     let slideContentComponent = null;
 
     if(slideContent == 1) {
         title = 'Choose your table';
-        slideContentComponent = <TableChooser />
+        slideContentComponent = <TableChooser onTableChoosen={table => onTableChoosen(table)} />
     } else if (slideContent == 2) {
         title = 'Register';
         slideContentComponent = <CustomerRegister />
@@ -37,6 +73,7 @@ export default function CustomerLayout({ children }) {
         title = 'Login';
         slideContentComponent = <CustomerLogin />
     }
+
 
     const onInputTableFocus = () => {
         setSlideContent(1);
@@ -90,19 +127,25 @@ export default function CustomerLayout({ children }) {
             <div className='bg-gray-200 h-18 rounded-2xl p-4 flex justify-between'>
                 <div className='flex'>
                     <TextInput
-                        type={`date`}
+                        type={`datetime-local`}
                         className={'w-64 mr-4'}
+                        value={tableReservation.reserve_at}
+                        onChange={e => setTableReservation({
+                            ...tableReservation,
+                            reserve_at: e.target.value
+                        })}
+
                     />
                     <TextInput
                         type={`text`}
                         className={'w-64 mr-4'}
                         placeHolder={'Choose your table'}
-                        value={'MEJA ' + table.name}
+                        value={'TABLE ' + tableReservation.table.name}
                         onFocus={onInputTableFocus} 
                     />
                 </div>
                 
-                <Button className={`text-white text-lg px-4 py-2 rounded-lg bg-green-600 hover:text-black`}>Reserve</Button>
+                <Button disable={processing} onClick={onReserve} className={`text-white text-lg px-4 py-2 rounded-lg bg-green-600 hover:text-black`}>Reserve</Button>
             </div>
             <SlideSideBar className={`w-1/2`}isOpen={isFormOpen} onClose={() => setFormOpen(false)} position="left" isScrollabe={false} title={title}>
                 {slideContentComponent}

@@ -16,5 +16,5 @@ class TableQuery extends Query
     public function collectionClass()
     {
         return TableCollection::class;
-    }
+    }   
 }

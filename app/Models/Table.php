@@ -37,9 +37,9 @@ class Table extends Model
      *
      * @return bool
      */
-    public function getIsReserved(): ?bool
+    public function getIsReserved(): bool
     {
-        return $this->description;
+        return $this->is_reserved;
     }
 
     /**

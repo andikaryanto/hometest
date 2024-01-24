@@ -16,7 +16,7 @@ class TableReservation extends Model
     use HasFactory;
     use TraitModel;
 
-    protected BelongsToRelation $table;
+    protected BelongsToRelation $tablee;
     protected BelongsToRelation $user;
 
     protected $casts = [
@@ -25,7 +25,7 @@ class TableReservation extends Model
 
     public function __construct(array $attribute = [])
     {
-        $this->table = new BelongsToRelation($this, Table::class, 'table_id');
+        $this->tablee = new BelongsToRelation($this, Table::class, 'table_id');
         $this->user = new BelongsToRelation($this, User::class, 'user_id');
     }
 
@@ -36,7 +36,7 @@ class TableReservation extends Model
      */
     public function getTablee(): ?Table
     {
-        return $this->table->get();
+        return $this->tablee->get();
     }
 
     /**
@@ -46,7 +46,7 @@ class TableReservation extends Model
      */
     public function setTablee(Table $table): TableReservation
     {
-        $this->table->set($table);
+        $this->tablee->set($table);
         return $this;
     }
 
@@ -74,19 +74,19 @@ class TableReservation extends Model
      *
      * @return Carbon
      */
-    public function getReservedAt(): Carbon
+    public function getReserveAt(): Carbon
     {
-        return $this->reserved_at;
+        return $this->reserve_at;
     }
 
     /**
      *
-     * @param Table $user
+     * @param Carbon $reserveAt
      * @return TableReservation
      */
-    public function setReservedAt(Carbon $reservedAt): TableReservation
+    public function setReserveAt(Carbon $reserveAt): TableReservation
     {
-        $this->reserved_at = $reservedAt;
+        $this->reserve_at = $reserveAt;
         return $this;
     }
 

@@ -27,6 +27,7 @@ use App\Routes\ProductRoute;
 use App\Routes\RegistrationTypeRoute;
 use App\Routes\SettingRoute;
 use App\Routes\ShopRoute;
+use App\Routes\TableReservationRoute;
 use App\Routes\TableRoute;
 use App\Routes\TreatmentRoute;
 use App\Routes\UomRoute;
@@ -53,4 +54,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 TableRoute::register();
+TableReservationRoute::register();
 UserRoute::register();

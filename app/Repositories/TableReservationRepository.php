@@ -2,23 +2,23 @@
 
 namespace App\Repositories;
 
-use App\Models\Table;
-use App\Repositories\TableRepositoryInterface;
-use App\ViewModels\TableCollection;
-use App\ViewModels\TableViewModel;
+use App\Models\TableReservation;
+use App\Repositories\TableReservationRepositoryInterface;
+use App\ViewModels\TableReservationCollection;
+use App\ViewModels\TableReservationViewModel;
 use Exception;
 use LaravelCommon\App\Repositories\Repository;
 use LaravelCommon\Exceptions\EntityException;
 use LaravelOrm\Interfaces\IEntity;
 
-class TableRepository extends Repository
+class TableReservationRepository extends Repository
 {
     /**
     * Constrcutor
     */
     public function __construct()
     {
-        parent::__construct(Table::class);
+        parent::__construct(TableReservation::class);
     }
 
     /**
@@ -28,7 +28,7 @@ class TableRepository extends Repository
      */
     public function collectionClass(): string
     {
-        return TableCollection::class;
+        return TableReservationCollection::class;
     }
 
     /**
@@ -38,6 +38,6 @@ class TableRepository extends Repository
      */
     public function viewModelClass(): string
     {
-        return TableViewModel::class;
+        return TableReservationViewModel::class;
     }
 }

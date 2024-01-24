@@ -39,9 +39,10 @@ export const url_uoms = '/uoms';
 export const url_uom = '/uom';
 export const url_users = '/app-users';
 export const url_user = '/app-user';
-export const url_user_login = '/app-user/login';
 export const url_villages = '/villages';
 export const url_visit_types = '/visit-types';
 
 
 export const url_tables = '/tables';
+export const url_table_reservation = '/table-reservation';
+export const url_user_login = '/app-user/login';
