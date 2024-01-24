@@ -24,7 +24,7 @@ class TableReservation extends Model
     ];
 
     protected $casts = [
-        'reserved_at' => 'datetime'
+        'reserve_at' => 'datetime'
     ];
 
     public function __construct(array $attribute = [])

@@ -20,6 +20,7 @@ use App\Routes\Web\SettingRoute;
 use App\Routes\Web\ShopRoute;
 use App\Routes\Web\TreatmentRoute;
 use App\Routes\Web\MedicalCheckup\Treatment\IncentiveRoute as MedicalCheckupTreatmentIncentiveRoute;
+use App\Routes\Web\TableReservationRoute;
 use App\Routes\Web\UomRoute;
 use App\Routes\Web\UserRoute;
 use Illuminate\Foundation\Application;
@@ -70,4 +71,5 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 HomeRoute::register();
+TableReservationRoute::register();
 

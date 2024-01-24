@@ -23,14 +23,21 @@ class TableReservationRoute extends CommonRoute
         return Route::middleware(
             [
                 CheckTokenMiddleware::class,
-                CheckScopeMiddleware::class . ':admin,customer'
             ]
         )->group(function () {
             Route::post('/table-reservation', [TableReservationController::class, 'store'])
                 ->middleware([
+                    
+                    CheckScopeMiddleware::class . ':admin,customer',
                     TableReservationRequestValidatorMiddleware::class . ':post',
                     TableReservationHydratorMiddleware::class . ':post',
                     UnitOfWorkMiddleware::class . ':commit'
+                    
+                ]);
+
+            Route::get('/table-reservations', [TableReservationController::class, 'getAll'])
+                ->middleware([
+                    CheckScopeMiddleware::class . ':admin'
                 ]);
         });
     }

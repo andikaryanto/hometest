@@ -45,4 +45,5 @@ export const url_visit_types = '/visit-types';
 
 export const url_tables = '/tables';
 export const url_table_reservation = '/table-reservation';
+export const url_table_reservations = '/table-reservations';
 export const url_user_login = '/app-user/login';

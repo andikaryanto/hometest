@@ -11,11 +11,13 @@ export const tableReservationNewObject = {
     reserve_for: ''
 }
 
+export const tableReservationListNewObject = {
+    _paging: paging
+}
+
 export const tableReservationListState = atom({
     key: 'tableReservationListState',
-    default: {
-        _paging: paging
-    },
+    default: tableReservationListNewObject,
 });
 
 export const tableReservationState = atom({
