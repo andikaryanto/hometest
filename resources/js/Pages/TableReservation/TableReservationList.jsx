@@ -85,7 +85,7 @@ export default function TableRerservationList() {
     }
 
     const onButtonActionClick = (actionButton, selectedItem) => {
-        if (actionButton.href != undefined && actionButton.caption == 'Detail') {
+        if (actionButton.caption == 'Complete') {
             window.location = actionButton.href + '?registration_id=' + selectedItem.registration.id;
         }
     }
@@ -93,8 +93,7 @@ export default function TableRerservationList() {
     const getActionButtonsItems = () => {
         return [
             {
-                caption: 'Complete',
-                href: config.web_url + '/checkup-record/add'
+                caption: 'Complete'
             }
         ];
     }
