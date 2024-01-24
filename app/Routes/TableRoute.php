@@ -21,15 +21,13 @@ class TableRoute extends CommonRoute
      */
     public static function register()
     {
-        return Route::prefix('warehouse')->group(function () {
-            Route::middleware(
-                [
-                    CheckTokenMiddleware::class,
-                    CheckScopeMiddleware::class . ':superadmin,cutomer'
-                ]
-            )->group(function () {
-                    Route::get('/tables', [TableController::class, 'getAll']);
-            });
+        return Route::middleware(
+            [
+                // CheckTokenMiddleware::class,
+                // CheckScopeMiddleware::class . ':superadmin,cutomer'
+            ]
+        )->group(function () {
+            Route::get('/tables', [TableController::class, 'getAll']);
         });
     }
 }

@@ -7,7 +7,7 @@ export const getCookie = (key) => {
         return cookie[1];
       }
     }
-    return '';
+    return null;
 };
 
 export const getToken = () => {

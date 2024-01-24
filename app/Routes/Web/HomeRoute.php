@@ -16,6 +16,6 @@ class HomeRoute extends CommonRoute
      */
     public static function register()
     {
-        Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
+        Route::get('/', [HomeController::class, 'index'])->middleware();
     }
 }

@@ -33,7 +33,7 @@ export default function SlideSideBar({ isOpen, onClose, children, position = 'ri
         <div className={`flex justify-between mb-3 ${borderedBottomTheme} p-4`}>
           <div className={`${bigFontColorTheme} text-2xl `}>{title}</div>
           <div className="flex">
-            <ThemeButton onClick={toggleTheme} />
+            {/* <ThemeButton onClick={toggleTheme} /> */}
             <Button onClick={onClose} className={`${bgTheme} p-2 rounded-md`}> <FaTimes /></Button>
           </div>
         </div>

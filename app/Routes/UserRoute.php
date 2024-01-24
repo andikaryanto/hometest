@@ -37,6 +37,12 @@ class UserRoute extends CommonRoute
                             UnitOfWorkMiddleware::class . ':persist'
                         ]
                     );
+                Route::post('/app-user/login', [UserController::class, 'login'])
+                    ->middleware(
+                        [
+                            
+                        ]
+                    );
                 // Route::get('/app-user/{user}', [UserController::class, 'get'])
                 //     ->middleware(
                 //         UserHydratorMiddleware::class . ':get'

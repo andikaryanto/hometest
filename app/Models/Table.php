@@ -11,6 +11,8 @@ class Table extends Model
     use HasFactory;
     use TraitModel;
 
+    protected $table = 'tables';
+
     /**
      *
      * @return string
