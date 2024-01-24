@@ -24,7 +24,7 @@ class TableReservationHydratorMiddleware extends HydratorMiddleware
      */
     public function hydrate()
     {
-        $this->when(
+        $this->when(  
             'reserve_at',
             [$this->model, 'setReserveAt'],
             [],
