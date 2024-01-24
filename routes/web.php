@@ -7,6 +7,7 @@ use App\Routes\Web\CheckupRecordRoute;
 use App\Routes\Web\ClinicRoute;
 use App\Routes\Web\DashboardRoute;
 use App\Routes\Web\DiseaseRoute;
+use App\Routes\Web\HomeRoute;
 use App\Routes\Web\ItemMovementRoute;
 use App\Routes\Web\ItemRoute;
 use App\Routes\Web\MedicalCheckup\ItemRoute as MedicalCheckupItemRoute;
@@ -38,7 +39,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     if (Auth::check()) {
         // User is authenticated
         // Your logic here
@@ -60,29 +61,13 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
 
-CheckupRecordRoute::register();
-ClinicRoute::register();
-DashboardRoute::register();
-DiseaseRoute::register();
-ItemRoute::register();
-ItemMovementRoute::register();
-MedicalCheckupRoute::register();
-MedicalCheckupItemRoute::register();
-MedicalCheckupTreatmentIncentiveRoute::register();
-NumberAssignmentRoute::register();
-PatientRegistrationRoute::register();
-PaymentRoute::register();
-PersonRoute::register();
-TreatmentRoute::register();
-UomRoute::register();
-UserRoute::register();
-SettingRoute::register();
-ShopRoute::register();
+HomeRoute::register();
+

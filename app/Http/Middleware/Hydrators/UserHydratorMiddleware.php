@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Middleware\Hydrators;
-
-use App\Models\Shop;
-use App\Repositories\ShopRepository;
 use Illuminate\Support\Facades\Hash;
 use LaravelCommon\App\Http\Middleware\HydratorMiddleware;
 use LaravelCommon\App\Repositories\UserRepository;
 
 class UserHydratorMiddleware extends HydratorMiddleware
 {
-    protected ShopRepository $shopRepository;
 
     public function __construct(
         UserRepository $userRepository,
