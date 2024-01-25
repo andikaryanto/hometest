@@ -62,6 +62,7 @@
     #### login to admin dashboard
         you can open a simple dashboard and see reservations have been created there
         > {base_url}/login
+        > {base_url}/admin -> is root of admin page
 
 - ### Technical
     i designed the base core of my application with a "package". if you look into composer.json there will be dependency called *andikaryanto11/laravelcommon*
