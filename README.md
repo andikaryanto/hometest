@@ -101,7 +101,16 @@
         when a user submit a reservation, it will create a reservation data to 'table_reservations' table, the process is when application processing the data, it will check the 'tables' table is being reserved or not, when it's not UnitOfWork will update the database table 'tables' with is_reserved to true. and in the next request if a user submit reservation will do the same, so when the request try to submit a reserved "tables" data, it throw an error to tell if table is being reserved
 
     - #### Api Docs
-      please checkout *routes\api.php*. i know it's poor doc. but i tried to make my code clean, i separate all api endpoint to a file (DDD design).
+        please checkout *routes\api.php*. i know it's poor doc. but i tried to make my code clean, i separate all api endpoint to a file (DDD design).      
+        ##### the pattern:
+
+        * {base_url}/api/table_reservations (GET) -> will reffer to 'getAll' method in controller, using plural name to indicate return of collection of table_reservations table data
+        * {base_url}/api/table_reservation (POST) -> will refer to 'store' method (with no path parameter), means it store singular data to a table in this case is table_reservations
+        * {base_url}/api/table_reservation/{tableReservation} (GET) -> will refer to 'get' method in controller and will return single row data of table_reservations with ID as /{tableReservation}.
+        * {base_url}/api/table_reservation/{tableReservation} (PACTH) -> will refer to 'pacth' method in controller and will pacth single row data of table_reservations with ID as /{tableReservation} and then return it
+        * {base_url}/api/table_reservation/{tableReservation} (DELETE) -> will delete the data from table_reservations with ID as /{tableReservation}
+
+        there is other possible naming here because of 'business' the company run, and still it's customable. 
 
 - ### Advance clean code (tried hard) 
     this is what i build:
@@ -118,7 +127,7 @@
             - it will hydrate http request post body to an entity in this case is TableReservationModel and will passed it to controller
             - it will hydrate http request get to an entity in this case is TableReservationModel like when /table-reservation/{tableReservation}, it will find the data from a table (/table-reservation/1) with ID 1
             and will pass it to controller
-            - it will hydrate http patch request, it will find the data with the ID 1 and modify the field with in the body from request then pass it to controller
+            - it will hydrate http patch request, it will find the data with the ID 1 (/table-reservation/1) and modify the field with in the body from request then pass it to controller
         * TableReservationQuery (app\Queries\TableReservationQuery.php) it is a query builder with Entity / Model base, so when we join with another table, and resulted 2 but the same, it will return distincted Model data.
         * TableReservationRepository (app\Repositories\TableReservationRepository.php)
         * TableReservationRoute (app\Routes\TableReservationRoute.php) this where i put routing within it's Domain Driven
